@@ -1,0 +1,38 @@
+import csv
+
+def loadcsv(filename):
+	lines = csv.reader(open(filename, "rt"))
+	dataset = list(lines)
+	for i in range(len(dataset)):
+		dataset[i] = dataset[i]
+	return dataset
+
+
+attributes = ['Sky', 'Temp', 'Humidity', 'Wind', 'Water', 'Forecast']
+print(attributes)
+num_attributes = len(attributes)
+
+filename = 'weather.csv'
+dataset = loadcsv(filename)
+print(dataset)
+
+target = ['Yes', 'Yes', 'No', 'Yes']
+print(target)
+
+hypothesis = ['0'] * num_attributes
+print(hypothesis)
+
+print('The hypothesis are : ')
+
+for i in range(len(target)):
+	if target[i] == "Yes":
+		for j in range(num_attributes):
+			if hypothesis[j] == '0':
+				hypothesis[j] = dataset[i][j]
+			if hypothesis[j] != dataset[i][j]:
+				hypothesis[j] = '?'
+
+	print(i + 1, " = ", hypothesis)
+
+print('The Final Hypothesis is : ')
+print(hypothesis)
